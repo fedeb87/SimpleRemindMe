@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
+
+    <RelativeLayout
+        android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="?attr/colorPrimary"
+        android:paddingLeft="@dimen/vertical_margin"
+        android:paddingTop="10dp"
+        android:paddingRight="@dimen/vertical_margin"
+        android:paddingBottom="4dp"
+
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        >
+
+        <ImageButton
+            android:id="@+id/buttonSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/ic_search_white_36dp"
+            tools:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/buttonCancelSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/edit_text_search"
+            android:layout_alignBottom="@+id/edit_text_search"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/ic_cancel"
+            tools:visibility="visible" />
+
+        <EditText
+            android:id="@+id/edit_text_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/hit_search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:theme="@style/LightEditText" />
+
+    </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/milestonesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layout_search"
+            android:layout_marginTop="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/vertical_margin_half"
+            android:paddingBottom="@dimen/vertical_margin_half"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/item_milestone" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

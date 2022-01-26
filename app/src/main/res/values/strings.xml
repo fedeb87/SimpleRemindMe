@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">SimpleRemindMe</string>
+
+    <string name="event_detail_title">Titulo del evento</string>
+    <string name="description_subtitle">DESCRIPCIÓN</string>
+    <string name="desc" translatable="false">Simple icon</string>
+    <string name="default_date" translatable="false">18/12/2021 15:00hs</string>
+    <string name="desc_default" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+
+    <string name="about_menu">Acerca De</string>
+    <string name="logout">Logout</string>
+    <string name="delete_milestone_title">Eliminar Evento?</string>
+    <string name="delete_milestone_msg">Esta seguro de que desea eliminar el evento?</string>
+    <string name="ok_button">Aceptar</string>
+    <string name="cancel_button">Cancelar</string>
+
+
+    <!--Drawer-->
+    <string name="menu_home">Inicio</string>
+    <string name="userName" translatable="false">Federico Beron</string>
+    <string name="userEmail" translatable="false">federico.beron@gmail.com</string>
+
+
+    <string name="menu_detail">Detalle</string>
+    <string name="menu_about">Acerca</string>
+
+    <!-- Settings -->
+    <string name="CHANNEL_ID" translatable="false">VERBOSE_NOTIFICATION</string>
+    <string name="VERBOSE_NOTIFICATION_CHANNEL_NAME" translatable="false">SimpleReminderMe Notifications</string>
+    <string name="VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION" translatable="false">Shows notifications whenever work starts</string>
+    <string name="NOTIFICATION_ID" translatable="false">1</string>
+    <string name="vibration_key" translatable="false">vibrar</string>
+    <string name="hit_search">Buscara eventos...</string>
+    <string name="event_type">Tipo del evento</string>
+    <string name="new_event_title">Nuevo Evento</string>
+    <string name="title_hint_milestone">Titulo del evento *</string>
+    <string name="event_type_title">Tipo de evento</string>
+    <string name="message_hint_milestone">Descripcion del evento</string>
+    <string name="date_hint">Dia *</string>
+    <string name="time_hint">Horario *</string>
+    <string name="edit_menu">Editar</string>
+    <string name="delete_menu">Eliminar</string>
+    <string name="remember_alarm">Recordatorio: </string>
+    <string name="about_title">FRAGMENTO ACERCA DE</string>
+</resources>
