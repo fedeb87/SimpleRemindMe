@@ -10,12 +10,10 @@ import com.federicoberon.simpleremindme.repositories.MilestoneRepository;
 import com.federicoberon.simpleremindme.repositories.MilestoneTypeRepository;
 import com.federicoberon.simpleremindme.ui.addmilestone.AddMilestoneViewModel;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.lang.reflect.InvocationTargetException;
