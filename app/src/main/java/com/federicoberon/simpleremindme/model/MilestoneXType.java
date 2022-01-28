@@ -2,12 +2,8 @@ package com.federicoberon.simpleremindme.model;
 
 import androidx.room.Embedded;
 import java.util.Date;
-import java.util.List;
 
 @SuppressWarnings("unused")
-/**
- * This class allow us to add typeName and typeColor to MilestoneEntity
- */
 public class MilestoneXType {
 
     @Embedded
@@ -85,15 +81,11 @@ public class MilestoneXType {
     /**
      * Using for testing purpose
      * @param milestoneToCompare second milestone to compare
-     * @return
+     * @return true when the object are the same
      */
     public boolean equals(MilestoneXType milestoneToCompare){
-        if (milestoneToCompare.getTitle().equals(getTitle()) &&
+        return milestoneToCompare.getTitle().equals(getTitle()) &&
                 milestoneToCompare.getDesc().equals(getDesc()) &&
-                milestoneToCompare.getType() == getType() &&
-                milestoneToCompare.getMilestoneDate().compareTo(getMilestoneDate()) == 0 ) {
-            return true;
-        }
-        return false;
+                milestoneToCompare.getType() == getType();
     }
 }

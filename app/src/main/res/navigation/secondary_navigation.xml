@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_item_detail"
-        android:name="com.federicoberon.simpleremindme.ui.milestoneDetail.MilestoneDetailFragment"
+        android:name="com.federicoberon.simpleremindme.ui.milestonedetail.MilestoneDetailFragment"
         android:label="@string/menu_detail"
         tools:layout="@layout/fragment_milestone_detail">
             <argument

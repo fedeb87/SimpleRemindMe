@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment {
 
-    private static String LOG_TAG = "HomeFragment";
+    private static final String LOG_TAG = "HomeFragment";
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private MilestoneAdapter adapter;
@@ -62,6 +62,17 @@ public class HomeFragment extends Fragment {
         showAllMilestones();
     }
 
+    /**
+     * Get all milestones without filters
+     */
+    private void showAllMilestones() {
+        mDisposable.add(homeViewModel.getMilestones("")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(milestones -> adapter.setMilestones(milestones),
+                        throwable -> Log.e(LOG_TAG, "Unable to get milestones: ", throwable)));
+    }
+
     private void filterMilestones(String query) {
         mDisposable.add(homeViewModel.getMilestones(query)
                 .subscribeOn(Schedulers.io())
@@ -85,20 +96,6 @@ public class HomeFragment extends Fragment {
         super.onStart();
         cleanMilestoneFilter();
     }
-
-    /**
-     * Get all milestones without filters
-     */
-    private void showAllMilestones() {
-        mDisposable.add(homeViewModel.getMilestones("")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(milestones -> {
-                            adapter.setMilestones(milestones);
-                        },
-                        throwable -> Log.e(LOG_TAG, "Unable to get milestones: ", throwable)));
-    }
-
 
     private void setupRecyclerView(
             RecyclerView recyclerView) {

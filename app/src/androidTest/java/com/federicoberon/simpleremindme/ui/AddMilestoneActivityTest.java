@@ -19,12 +19,11 @@ import android.widget.TimePicker;
 import androidx.arch.core.executor.testing.CountingTaskExecutorRule;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.federicoberon.simpleremindme.MainActivity;
 import com.federicoberon.simpleremindme.R;
-import com.federicoberon.simpleremindme.TestData;
+import com.federicoberon.simpleremindme.TestDataHelper;
 import com.federicoberon.simpleremindme.model.MilestoneXType;
 
 import org.hamcrest.Matchers;
@@ -51,14 +50,14 @@ public class AddMilestoneActivityTest {
 
     @Before
     public void setupMilestone(){
-         milestone = TestData.MILESTONE_3;
+         milestone = TestDataHelper.MILESTONE_3;
     }
 
     @Test
-    public void createNewMilestone() throws Throwable{
+    public void createNewMilestone(){
 
         // press add button
-        onView(ViewMatchers.withId(R.id.fab))
+        onView(withId(R.id.fab))
                 .perform(click());
 
         // set milestone title
@@ -76,38 +75,42 @@ public class AddMilestoneActivityTest {
         // set milestone date
         onView(withId(R.id.editTextDate)).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
-                .perform(PickerActions.setDate(TestData.getDate1().get(Calendar.YEAR)
-                        , TestData.getDate1().get(Calendar.MONTH)
-                        , TestData.getDate1().get(Calendar.DAY_OF_MONTH)));
+                .perform(PickerActions.setDate(TestDataHelper.getDate1().get(Calendar.YEAR)
+                        , TestDataHelper.getDate1().get(Calendar.MONTH)
+                        , TestDataHelper.getDate1().get(Calendar.DAY_OF_MONTH)));
         onView(withId(android.R.id.button1)).perform(click());
 
         // set milestone time
         onView(withId(R.id.editTextTime)).perform(click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName())))
-                .perform(PickerActions.setTime(TestData.getDate1().get(Calendar.HOUR)
-                        , TestData.getDate1().get(Calendar.MINUTE)));
+                .perform(PickerActions.setTime(TestDataHelper.getDate1().get(Calendar.HOUR)
+                        , TestDataHelper.getDate1().get(Calendar.MINUTE)));
         onView(withId(android.R.id.button1)).perform(click());
 
         // press OK button
         onView(withId(R.id.okButton))
                 .perform(click());
-        drain();
+
+        try {
+            drain();
+        } catch (TimeoutException | InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // check that element are visible in a main list
-        onView(ViewMatchers.withId(R.id.milestonesRecyclerView))
+        onView(withId(R.id.milestonesRecyclerView))
                 .perform(RecyclerViewActions.scrollTo(hasDescendant(withText(milestone.getTitle()))));
 
     }
 
     @Test
     public void deleteMilestone(){
-
         // check that the milestone are there and click on it
-        onView(ViewMatchers.withId(R.id.milestonesRecyclerView))
+        onView(withId(R.id.milestonesRecyclerView))
                 .perform(RecyclerViewActions.scrollTo(hasDescendant(withText(milestone.getTitle()))));
 
         // click on it
-        onView(ViewMatchers.withId(R.id.milestonesRecyclerView))
+        onView(withId(R.id.milestonesRecyclerView))
                 .perform(RecyclerViewActions.actionOnItem(
                         hasDescendant(withText(milestone.getTitle())), click()));
 

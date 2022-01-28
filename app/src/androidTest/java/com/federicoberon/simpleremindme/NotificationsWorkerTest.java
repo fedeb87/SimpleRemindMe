@@ -13,14 +13,10 @@ import com.federicoberon.simpleremindme.workmanager.NotificationsWorker;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import junitparams.JUnitParamsRunner;
-
-@RunWith(JUnitParamsRunner.class)
 public class NotificationsWorkerTest {
 
     private Application context;

@@ -1,18 +1,9 @@
 package com.federicoberon.simpleremindme.datasource;
 
-import android.content.ContentValues;
-
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import com.federicoberon.simpleremindme.TestData;
-import com.federicoberon.simpleremindme.datasource.AppDatabase;
-import com.federicoberon.simpleremindme.datasource.MilestoneDao;
+import com.federicoberon.simpleremindme.TestDataHelper;
+import com.federicoberon.simpleremindme.TestUtils;
 import com.federicoberon.simpleremindme.model.MilestoneXType;
 
 import org.junit.After;
@@ -34,23 +25,7 @@ public class MilestoneDaoTest {
 
     @Before
     public void initDb() {
-
-        RoomDatabase.Callback rdc = new RoomDatabase.Callback(){
-            public void onCreate (SupportSQLiteDatabase db){
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("title", "Family");
-                contentValues.put("color", "#F06423");
-                db.insert("milestone_types", OnConflictStrategy.IGNORE, contentValues);
-            }
-        };
-
-        mDatabase = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(),
-                AppDatabase.class)
-                .addCallback(rdc)
-                // allowing main thread queries, just for testing
-                .allowMainThreadQueries()
-                .build();
-
+        mDatabase = TestUtils.initDb();
         mMilestoneDao = mDatabase.milestoneDao();
     }
 
@@ -61,25 +36,28 @@ public class MilestoneDaoTest {
 
     @Test
     public void getAllMilestonesWhenNoMilestoneInserted() {
+        // The emitted type is the expected one
         mMilestoneDao.getAllMilestone().
                 test().
-                assertEmpty();
+                assertValue(List::isEmpty);
     }
 
     @Test
     public void getFilterMilestoneTest(){
-        MilestoneXType milestone = TestData.MILESTONE_2;
+        MilestoneXType milestone = TestDataHelper.MILESTONE_1;
         mMilestoneDao.getMilestones(milestone.getTitle()).
                 test().
-                assertEmpty();
+                assertValue(List::isEmpty);
 
-        mMilestoneDao.insertMilestone(milestone.getMilestone());
+        mMilestoneDao.insertMilestone(milestone.getMilestone())
+                .test()
+                .assertComplete();
 
         mMilestoneDao.getMilestones(milestone.getTitle()).
                 test().
                 assertValue(milestone2 -> {
                     if (milestone2.size()==1)
-                        return milestone2.get(0).equals(TestData.MILESTONE_2);
+                        return milestone2.get(0).equals(TestDataHelper.MILESTONE_1);
                     return false;
                 });
 
@@ -88,27 +66,27 @@ public class MilestoneDaoTest {
     @Test
     public void writeUserAndReadInList() {
 
-        MilestoneXType milestone = TestData.MILESTONE_1;
+        MilestoneXType milestone = TestDataHelper.MILESTONE_1;
         mMilestoneDao.insertMilestone(milestone.getMilestone()).
             test().assertComplete();
 
 
-        mMilestoneDao.getMilestoneById(TestData.MILESTONE_1.getId()).
+        mMilestoneDao.getMilestoneById(TestDataHelper.MILESTONE_1.getId()).
                 test().
                 assertValue(milestone1 -> {
                     // The emitted user is the expected one
-                    return milestone1.equals(TestData.MILESTONE_1);
+                    return milestone1.equals(TestDataHelper.MILESTONE_1);
                 });
     }
 
     @Test
     public void deleteMilestoneTest() {
-        MilestoneXType milestone = TestData.MILESTONE_1;
+        MilestoneXType milestone = TestDataHelper.MILESTONE_1;
 
         //check database are empty
         mMilestoneDao.getMilestones(milestone.getTitle()).
                 test().
-                assertEmpty();
+                assertValue(List::isEmpty);
 
         // insert one element
         mMilestoneDao.insertMilestone(milestone.getMilestone()).
@@ -131,6 +109,5 @@ public class MilestoneDaoTest {
         mMilestoneDao.getAllMilestone().
                 test().
                 assertValue(List::isEmpty);
-
     }
 }

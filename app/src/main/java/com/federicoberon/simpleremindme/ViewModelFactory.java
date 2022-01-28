@@ -11,7 +11,8 @@ import androidx.work.WorkManager;
 
 import com.federicoberon.simpleremindme.repositories.MilestoneRepository;
 import com.federicoberon.simpleremindme.repositories.MilestoneTypeRepository;
-import com.federicoberon.simpleremindme.ui.addMilestone.AddMilestoneViewModel;
+import com.federicoberon.simpleremindme.ui.about.AboutViewModel;
+import com.federicoberon.simpleremindme.ui.addmilestone.AddMilestoneViewModel;
 import com.federicoberon.simpleremindme.ui.home.HomeViewModel;
 
 /**
@@ -20,7 +21,6 @@ import com.federicoberon.simpleremindme.ui.home.HomeViewModel;
  * This creator is to showcase how to inject dependencies into ViewModels. It's not
  * actually necessary in this case, as the product ID can be passed in a public method.
  */
-@SuppressWarnings("unused")
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     @SuppressLint("StaticFieldLeak")
@@ -79,6 +79,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new HomeViewModel(mMilestoneRepository, mWorkManager);
         } else if (modelClass.isAssignableFrom(AddMilestoneViewModel.class)) {
             return (T) new AddMilestoneViewModel(mMilestoneRepository, mMilestoneTypeRepository, mWorkManager, mApplication);
+        } else if (modelClass.isAssignableFrom(AboutViewModel.class)) {
+            return (T) new AboutViewModel(mApplication);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

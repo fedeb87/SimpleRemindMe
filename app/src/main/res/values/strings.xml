@@ -42,4 +42,5 @@
     <string name="delete_menu">Eliminar</string>
     <string name="remember_alarm">Recordatorio: </string>
     <string name="about_title">FRAGMENTO ACERCA DE</string>
+    <string name="about_fragment_hint">This is about fragment</string>
 </resources>

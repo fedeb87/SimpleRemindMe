@@ -1,4 +1,4 @@
-package com.federicoberon.simpleremindme.ui.addMilestone;
+package com.federicoberon.simpleremindme.ui.addmilestone;
 
 import static java.lang.String.format;
 

@@ -1,5 +1,6 @@
 package com.federicoberon.simpleremindme.ui.home;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.federicoberon.simpleremindme.model.MilestoneXType;
@@ -17,12 +18,12 @@ public class MilestoneDiffCallback extends DiffUtil.Callback{
 
     @Override
     public int getOldListSize() {
-        return mOldMilestoneList.size();
+        return mOldMilestoneList != null ? mOldMilestoneList.size() : 0;
     }
 
     @Override
     public int getNewListSize() {
-        return mNewMilestoneList.size();
+        return mNewMilestoneList != null ? mNewMilestoneList.size() : 0;
     }
 
     @Override
@@ -37,6 +38,13 @@ public class MilestoneDiffCallback extends DiffUtil.Callback{
         final MilestoneXType newMilestone = mNewMilestoneList.get(newItemPosition);
 
         return oldMilestone.equals(newMilestone);
+    }
+
+    @Nullable
+    @Override
+    public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+        //you can return particular field for changed item.
+        return super.getChangePayload(oldItemPosition, newItemPosition);
     }
 }
 

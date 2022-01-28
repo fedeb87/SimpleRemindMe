@@ -17,7 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavDeepLinkBuilder;
 import com.federicoberon.simpleremindme.R;
-import com.federicoberon.simpleremindme.ui.milestoneDetail.MilestoneDetailFragment;
+import com.federicoberon.simpleremindme.ui.milestonedetail.MilestoneDetailFragment;
 
 public class WorkerUtils {
 

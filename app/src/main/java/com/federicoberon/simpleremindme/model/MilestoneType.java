@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "milestone_types")
 public class MilestoneType {
     @PrimaryKey(autoGenerate = true)
@@ -49,5 +51,18 @@ public class MilestoneType {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MilestoneType that = (MilestoneType) o;
+        return title.equals(that.title) && color.equals(that.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, color);
     }
 }

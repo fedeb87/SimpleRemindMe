@@ -1,6 +1,5 @@
-package com.federicoberon.simpleremindme.ui.addMilestone;
+package com.federicoberon.simpleremindme.ui.addmilestone;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;

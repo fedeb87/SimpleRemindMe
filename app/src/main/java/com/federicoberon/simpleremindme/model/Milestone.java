@@ -25,10 +25,10 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
-import java.util.UUID;
+import java.util.Objects;
 
 /**
- * Immutable model class for a User
+ * Immutable model class for a Milestone
  */
 @Entity(tableName = "milestones", foreignKeys = {@ForeignKey(entity = MilestoneType.class,
         parentColumns = "id",
@@ -103,5 +103,18 @@ public class Milestone {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Milestone milestone = (Milestone) o;
+        return type == milestone.type && title.equals(milestone.title) && description.equals(milestone.description) && milestoneDate.equals(milestone.milestoneDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, milestoneDate, type);
     }
 }

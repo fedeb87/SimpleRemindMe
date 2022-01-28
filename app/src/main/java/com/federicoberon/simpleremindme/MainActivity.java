@@ -13,7 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.federicoberon.simpleremindme.databinding.ActivityMainBinding;
-import com.federicoberon.simpleremindme.ui.addMilestone.AddMilestoneActivity;
+import com.federicoberon.simpleremindme.ui.addmilestone.AddMilestoneActivity;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        com.federicoberon.simpleremindme.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);

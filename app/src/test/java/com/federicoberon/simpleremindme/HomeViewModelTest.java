@@ -1,30 +1,10 @@
-/*
- * Copyright (C) 2017 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.federicoberon.simpleremindme;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import androidx.annotation.NonNull;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.work.WorkManager;
-
-import com.federicoberon.simpleremindme.model.MilestoneXType;
 import com.federicoberon.simpleremindme.repositories.MilestoneRepository;
 import com.federicoberon.simpleremindme.ui.home.HomeViewModel;
 
@@ -38,7 +18,6 @@ import java.util.Collections;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.functions.Predicate;
 
 /**
  * Unit test for {@link HomeViewModel}
@@ -68,43 +47,39 @@ public class HomeViewModelTest {
         // Given that the UserDataSource returns an empty list of users
         when(milestoneRepository.getAllMilestone()).thenReturn(Flowable.empty());
 
-        //When getting the user name
+        //When getting the Milestone
         mViewModel.getMilestones("")
                 .test()
-                // The user name is empty
+                // That is empty
                 .assertNoValues();
     }
 
     @Test
     public void getMilestone_whenMilestoneSaved() {
-        // Given that the UserDataSource returns a user
+        // Given that the Repo returns a milestone
+        when(milestoneRepository.getAllMilestone()).thenReturn(Flowable.just(Collections.singletonList(TestDataHelper.MILESTONE_1)));
 
-        when(milestoneRepository.getAllMilestone()).thenReturn(Flowable.just(Collections.singletonList(TestData.MILESTONE_1)));
-
-        //When getting the user name
+        //When getting the milestone
         mViewModel.getMilestones("")
                 .test()
-                .assertValue(Collections.singletonList(TestData.MILESTONE_1));
+                .assertValue(Collections.singletonList(TestDataHelper.MILESTONE_1));
 
     }
 
     @Test
     public void getMilestoneById() {
-        // Given that the UserDataSource returns a user
-        long id = TestData.MILESTONE_2.getId();
-        when(milestoneRepository.getMilestoneById(id)).thenReturn(Flowable.just(TestData.MILESTONE_2));
+        // Given that the Repo returns a milestone
+        long id = TestDataHelper.MILESTONE_2.getId();
+        when(milestoneRepository.getMilestoneById(id)).thenReturn(Flowable.just(TestDataHelper.MILESTONE_2));
 
-        //When getting the user name
+        //When getting the milestone
         mViewModel.getMilestoneById(id)
                 .test()
-                // The correct user name is emitted
-                .assertValue(new Predicate<MilestoneXType>() {
-                    @Override
-                    public boolean test(@NonNull MilestoneXType milestoneXType) {
-                        // The emitted user is the expected one
-                        return milestoneXType.equals(TestData.MILESTONE_2) &&
-                                mViewModel.getCurrentMilestoneId() == TestData.MILESTONE_2.getId();
-                    }
+                // The correct milestone is emitted
+                .assertValue(milestoneXType -> {
+                    // The emitted milestone is the expected one
+                    return milestoneXType.equals(TestDataHelper.MILESTONE_2) &&
+                            mViewModel.getCurrentMilestoneId() == TestDataHelper.MILESTONE_2.getId();
                 });
 
     }
@@ -113,7 +88,7 @@ public class HomeViewModelTest {
     public void deleteMilestone(){
 
         long testId = 1;
-        // Given that the UserDataSource returns an empty list of users
+        // Given that the Repo returns a Completable
         when(milestoneRepository.deleteMilestone(testId)).thenReturn(Completable.complete());
 
         mViewModel.deleteMilestone();

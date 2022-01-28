@@ -1,5 +1,6 @@
-package com.federicoberon.simpleremindme.ui.addMilestone;
+package com.federicoberon.simpleremindme.ui.addmilestone;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import androidx.lifecycle.ViewModel;
@@ -25,6 +26,7 @@ public class AddMilestoneViewModel extends ViewModel {
     private final WorkManager mWorkManager;
     private final MilestoneTypeRepository mMilestoneTypeRepository;
     private final MilestoneRepository mMilestoneRepository;
+    @SuppressLint("StaticFieldLeak")
     private final Context context;
     private Milestone insertedMilestone;
     private int mHour;
@@ -33,14 +35,17 @@ public class AddMilestoneViewModel extends ViewModel {
     private int mMonth;
     private int mDay;
 
-    public AddMilestoneViewModel(MilestoneRepository milestoneRepository, MilestoneTypeRepository repo, WorkManager workManager, Application mApplication) {
+    public AddMilestoneViewModel(MilestoneRepository milestoneRepository,
+                                 MilestoneTypeRepository repo, WorkManager workManager,
+                                 Application mApplication) {
         this.mWorkManager = workManager;
         this.mMilestoneTypeRepository = repo;
         this.mMilestoneRepository = milestoneRepository;
         this.context = mApplication;
     }
 
-    public AddMilestoneViewModel(MilestoneRepository milestoneRepository, MilestoneTypeRepository repo, WorkManager workerManager) {
+    public AddMilestoneViewModel(MilestoneRepository milestoneRepository,
+                                 MilestoneTypeRepository repo, WorkManager workerManager) {
         this.mMilestoneRepository = milestoneRepository;
         this.mMilestoneTypeRepository = repo;
         mWorkManager = workerManager;
@@ -80,20 +85,21 @@ public class AddMilestoneViewModel extends ViewModel {
         return this.insertedMilestone;
     }
 
-    public Maybe<Long> saveMilestone(String title, String description, Date milestoneDate, int type) {
+    public Maybe<Long> saveMilestone(String title, String description,
+                                     Date milestoneDate, int type) {
         insertedMilestone = new Milestone(title, description, milestoneDate, type);
         return mMilestoneRepository.insertOrUpdateMilestone(insertedMilestone);
     }
 
     private String getTimeToNotificationMessage(Date milestoneDate) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(milestoneDate);
-
-        String formattedHour =  (calendar.get(Calendar.HOUR) < 10)? "0" + calendar.get(Calendar.HOUR) : String.valueOf(calendar.get(Calendar.HOUR));
-        String formattedMinute = (calendar.get(Calendar.MINUTE) < 10)? "0" + calendar.get(Calendar.MINUTE) :String.valueOf(calendar.get(Calendar.MINUTE));
-
-        return calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR) + ", " + formattedHour + ":" + formattedMinute;
+        String formattedHour =  (calendar.get(Calendar.HOUR) < 10)? "0"
+                + calendar.get(Calendar.HOUR) : String.valueOf(calendar.get(Calendar.HOUR));
+        String formattedMinute = (calendar.get(Calendar.MINUTE) < 10)? "0"
+                + calendar.get(Calendar.MINUTE) :String.valueOf(calendar.get(Calendar.MINUTE));
+        return calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH)
+                + "/" + calendar.get(Calendar.YEAR) + ", " + formattedHour + ":" + formattedMinute;
     }
 
     public void scheduledMilestone(long id){
@@ -103,8 +109,10 @@ public class AddMilestoneViewModel extends ViewModel {
         long currentTime = System.currentTimeMillis();
         long specificTimeToTrigger = insertedMilestone.getMilestoneDate().getTime();
 
+        assert context != null;
         Data args = new Data.Builder()
-                .putString("title", context.getString(R.string.remember_alarm) + getTimeToNotificationMessage(insertedMilestone.getMilestoneDate()))
+                .putString("title", context.getString(R.string.remember_alarm)
+                        + getTimeToNotificationMessage(insertedMilestone.getMilestoneDate()))
                 .putString("message", insertedMilestone.getTitle())
                 .putLong("id", id)
                 .build();

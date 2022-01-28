@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.addMilestone.AddMilestoneActivity"
+        <activity android:name=".ui.addmilestone.AddMilestoneActivity"
             android:configChanges="orientation|screenSize"/>
     </application>
 

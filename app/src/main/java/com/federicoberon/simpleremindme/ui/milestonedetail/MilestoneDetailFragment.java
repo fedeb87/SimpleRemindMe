@@ -1,4 +1,4 @@
-package com.federicoberon.simpleremindme.ui.milestoneDetail;
+package com.federicoberon.simpleremindme.ui.milestonedetail;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MilestoneDetailFragment extends Fragment {
 
-    private static String LOG_TAG = "MilestoneDetailFragment";
+    private static final String LOG_TAG = "MilestoneDetailFragment";
     public static final String KEY_MILESTONE_ID = "milestone_id";
     private HomeViewModel viewModel;
     private FragmentMilestoneDetailBinding binding;
@@ -60,7 +60,7 @@ public class MilestoneDetailFragment extends Fragment {
     }
 
     private void populateUI(MilestoneXType selectedMilestone) {
-        if (!(selectedMilestone == null)) {
+        if ((selectedMilestone != null)) {
             binding.textViewTitle.setText(selectedMilestone.getTitle());
             binding.textViewDescription.setText(selectedMilestone.getDesc());
             binding.textViewType.setText(selectedMilestone.getTypeName());

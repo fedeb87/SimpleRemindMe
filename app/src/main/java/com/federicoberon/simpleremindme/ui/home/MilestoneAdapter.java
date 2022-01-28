@@ -1,5 +1,6 @@
 package com.federicoberon.simpleremindme.ui.home;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -8,13 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.federicoberon.simpleremindme.R;
 import com.federicoberon.simpleremindme.databinding.ItemMilestoneBinding;
 import com.federicoberon.simpleremindme.model.MilestoneXType;
-import com.federicoberon.simpleremindme.ui.milestoneDetail.MilestoneDetailFragment;
+import com.federicoberon.simpleremindme.ui.milestonedetail.MilestoneDetailFragment;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -58,11 +58,10 @@ public class MilestoneAdapter extends RecyclerView.Adapter<MilestoneAdapter.Mile
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setMilestones(List<MilestoneXType> milestones) {
         this.milestones = milestones;
-        final MilestoneDiffCallback diffCallback = new MilestoneDiffCallback(this.milestones, milestones);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-        diffResult.dispatchUpdatesTo(this);
+        notifyDataSetChanged();
     }
 
 
