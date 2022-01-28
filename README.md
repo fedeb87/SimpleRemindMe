@@ -13,9 +13,9 @@ This project uses [feature modularization architecture](https://proandroiddev.co
 ## Before you start
 This project requires the following
 
-    1. Android Studio 4.2 (stable channel) or higher.
-    2. Android SDK 23 or above.
-    3. Android SDK build tools 23.0.3 or above.
+ 1. Android Studio 4.2 (stable channel) or higher.
+ 2. Android SDK 23 or above.
+ 3. Android SDK build tools 23.0.3 or above.
 
 ## Screenshots
 The screenshot below shows how the app looks like when it is done.
@@ -24,21 +24,21 @@ The screenshot below shows how the app looks like when it is done.
 
 ### Libraries
 
-    - Application entirely written in Java.
-    - Asynchronous processing using [RXJava](https://reactivex.io/).
-    - [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) to schedule alarms and notifications.
-    - [Room](https://dagger.dev/) for local data storage.
-    - Uses [JUnit4](https://developer.android.com/training/testing/junit-rules), [Espresso](https://developer.android.com/training/testing/espresso), [Robolectric](http://robolectric.org/) among other libraries for unit & instrumented tests.
+ - Application entirely written in Java.
+ - Asynchronous processing using [RXJava](https://reactivex.io/).
+ - [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) to schedule alarms and notifications.
+ - [Room](https://dagger.dev/) for local data storage.
+ - Uses [JUnit4](https://developer.android.com/training/testing/junit-rules), [Espresso](https://developer.android.com/training/testing/espresso), [Robolectric](http://robolectric.org/) among other libraries for unit & instrumented tests.
 
 ## Notes
 The application does not have all the functionalities developed. Since the main idea is to expose a structure on which to later work on extending.
 I think it is not necessary to emphasize that the project is open to contributions, improvement proposals and corrections ;)
 The notes below describe some features that are not currently being developed that you could help implement.
 
-    1. About screen are not developer
-    2. Validations over input forms are not developed
-    3. Update created Event are not developed
-    4. Following de same structure you can develop the Event types management. Allowing users to define her owns types.
+ 1. About screen are not developer
+ 2. Validations over input forms are not developed
+ 3. Update created Event are not developed
+ 4. Following de same structure you can develop the Event types management. Allowing users to define her owns types.
 
 ## 📃 License
 
