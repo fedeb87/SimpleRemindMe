@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/v/release/fedeb87/SimpleRemindMe.svg?label=release&style=for-the-badge)]() ![GitHub issues](https://img.shields.io/github/issues/fedeb87/SimpleRemindMe?label=issues&style=for-the-badge) [![GitHub last commit](https://img.shields.io/github/last-commit/fedeb87/SimpleRemindMe?label=last-commit&style=for-the-badge)]() [![GitHub license](https://img.shields.io/github/license/fedeb87/SimpleRemindMe?label=license&style=for-the-badge)](https://github.com/fedeb87/SimpleRemindMe/blob/master/LICENSE) 
+[![GitHub release](https://img.shields.io/github/v/release/fedeb87/SimpleRemindMe.svg?label=release)](https://github.com/fedeb87/SimpleRemindMe/releases) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/84f9abc9cb294d38aabfcb33a2c90c47)](https://www.codacy.com/gh/fedeb87/SimpleRemindMe/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fedeb87/SimpleRemindMe&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/84f9abc9cb294d38aabfcb33a2c90c47)](https://www.codacy.com/gh/fedeb87/SimpleRemindMe/dashboard?utm_source=github.com&utm_medium=referral&utm_content=fedeb87/SimpleRemindMe&utm_campaign=Badge_Coverage) [![GitHub issues](https://img.shields.io/github/issues/fedeb87/SimpleRemindMe?label=issues)](https://github.com/fedeb87/SimpleRemindMe/issues) [![GitHub last commit](https://img.shields.io/github/last-commit/fedeb87/SimpleRemindMe?label=last-commit)](https://github.com/fedeb87/SimpleRemindMe/commits) [![GitHub license](https://img.shields.io/github/license/fedeb87/SimpleRemindMe?label=license)](https://github.com/fedeb87/SimpleRemindMe/blob/master/LICENSE)
 
 # SimpleRemindMeApp
 
@@ -8,7 +8,7 @@ The main idea is to show how to design an app following the mvvm architecture. I
 
 ## Tech Stack
 
-This project uses [feature modularization architecture](https://proandroiddev.com/intro-to-app-modularization-42411e4c421e) and uses MVVM as software design patter. 
+This project uses [feature modularization architecture](https://proandroiddev.com/intro-to-app-modularization-42411e4c421e) and uses MVVM as software design patter.
 
 ## Before you start
 This project requires the following
@@ -20,7 +20,7 @@ This project requires the following
 ## Screenshots
 The screenshot below shows how the app looks like when it is done.
 
-![](https://i.imgur.com/3zxh1y6l.png)   ![Imgur](https://i.imgur.com/ED9sTXKl.png)   ![Imgur](https://i.imgur.com/zldJNrwl.png)   ![Imgur](https://i.imgur.com/6yEWOKSl.png)  
+![](https://i.imgur.com/3zxh1y6l.png)   ![Imgur](https://i.imgur.com/ED9sTXKl.png)   ![Imgur](https://i.imgur.com/zldJNrwl.png)   ![Imgur](https://i.imgur.com/6yEWOKSl.png)
 
 ### Libraries
 
