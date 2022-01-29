@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   android: circleci/android@2.0.0
-  gcp-cli: circleci/gcp-cli@2.2.0
 
 jobs:
   unit-test:
@@ -30,12 +29,9 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit
+      - tag: latest
 
   android-test:
-    parameters:
-      system-image:
-        type: string
-        default: system-images;android-30;google_apis;x86
     executor:
       name: android/android-machine
       resource-class: xlarge
@@ -43,7 +39,7 @@ jobs:
       - checkout
       - android/start-emulator-and-run-tests:
           test-command: ./gradlew connectedDebugAndroidTest
-          system-image: << parameters.system-image >>
+          system-image: system-images;android-30;google_apis;x86
       - run:
           name: Save test results
           command: |
@@ -80,7 +76,7 @@ workflows:
             resource-class: xlarge
           filters:
             branches:
-              ignore: main # regular commits
+              ignore: master # regular commits
       - android-test:
           matrix:
             alias: android-test-all
@@ -97,12 +93,12 @@ workflows:
           name: android-test-<<matrix.system-image>>
           filters:
             branches:
-              only: main # Commits to main branch
+              only: master # Commits to master branch
       - release-build:
           requires:
             - unit-test
             - android-test-all
           filters:
             branches:
-              only: main # Commits to main branch
+              only: master # Commits to master branch
 
