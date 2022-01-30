@@ -13,6 +13,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import android.view.Gravity;
 
+import androidx.arch.core.executor.testing.CountingTaskExecutorRule;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.contrib.DrawerActions;
 import androidx.test.espresso.contrib.NavigationViewActions;
@@ -32,6 +33,8 @@ import org.junit.runners.MethodSorters;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainActivityTest {
@@ -39,6 +42,9 @@ public class MainActivityTest {
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
+
+    @Rule
+    public CountingTaskExecutorRule mCountingTaskExecutorRule = new CountingTaskExecutorRule();
 
     @Before
     public void setupRecyclerView(){
@@ -74,7 +80,6 @@ public class MainActivityTest {
         // Start the screen of your activity.
         onView(withId(R.id.nav_view))
                 .perform(NavigationViewActions.navigateTo(R.id.nav_about));
-
 
         onView(withId(R.id.textAbout)).check(matches(isDisplayed()));
     }
