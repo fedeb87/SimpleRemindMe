@@ -18,7 +18,7 @@ jobs:
         run: bash ./gradlew test --stacktrace
   
   ui-test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         api-level: [24, 29, 31]
@@ -41,7 +41,6 @@ jobs:
       - name: run uitests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          java-version: '11'
           api-level: 29
           target: ${{ matrix.target }}
           disable-animations: true
