@@ -17,7 +17,7 @@ jobs:
         cache: gradle
         
     - name: Run unit test
-      uses: ./gradlew testDebug
+      uses: ./gradlew test
       
     - name: Run Instrumentation Tests
       uses: ./gradlew/createDebugAndroidTestCoverageReport
