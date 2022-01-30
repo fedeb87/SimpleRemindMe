@@ -1,31 +1,24 @@
 package com.federicoberon.simpleremindme.ui.addmilestone;
 
-import static java.lang.String.format;
-
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.federicoberon.simpleremindme.ViewModelFactory;
 import com.federicoberon.simpleremindme.databinding.ActivityAddMilestoneBinding;
-
-import java.util.Calendar;
+import com.federicoberon.simpleremindme.ui.CustomDatePicker;
+import com.federicoberon.simpleremindme.ui.CustomTimePicker;
 import java.util.Objects;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class AddMilestoneActivity extends AppCompatActivity {
 
-    private static String LOG_TAG = "AddMilestoneActivity";
+    private static final String LOG_TAG = "AddMilestoneActivity";
     public static final String KEY_TYPE_ID = "idType";
     private AddMilestoneViewModel addMilestoneViewModel;
     private ActivityAddMilestoneBinding binding;
@@ -112,49 +105,12 @@ public class AddMilestoneActivity extends AppCompatActivity {
     }
 
     public void showDatePickerDialog(){
-        int year;
-        int month;
-        int day;
-
-        year = Calendar.getInstance().get(Calendar.YEAR);
-        month = Calendar.getInstance().get(Calendar.MONTH);
-        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                (view, year1, month1, dayOfMonth) -> {
-                    addMilestoneViewModel.setDate(year1, month1, dayOfMonth);
-                    month1++;
-
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, year1);
-                    cal.set(Calendar.MONTH, month1);
-                    cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-                    binding.editTextDate.setText(DateFormat.getDateFormat(this.getApplicationContext()).format(cal.getTime()));
-                }, year, month, day);
-        datePickerDialog.show();
+        new CustomDatePicker(addMilestoneViewModel, binding.editTextDate)
+                .show(getSupportFragmentManager(), "datePicker");
     }
 
     private void showTimePicker(){
-        int hora;
-        int minute;
-
-        Calendar c = Calendar.getInstance();
-        hora = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
-
-        TimePickerDialog timeGetter = new TimePickerDialog(this, (view, hourOfDay, minute1) -> {
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
-            cal.set(Calendar.MINUTE, minute1);
-            cal.set(Calendar.SECOND,0);
-            cal.set(Calendar.MILLISECOND,0);
-
-            addMilestoneViewModel.setTime(hourOfDay, minute1);
-            binding.editTextTime.setText(format("%s", DateFormat.getTimeFormat(this).format(cal.getTime())));
-
-        }, hora, minute, false);
-
-        timeGetter.show();
+        new CustomTimePicker(addMilestoneViewModel, binding.editTextTime)
+                .show(getSupportFragmentManager(), "timePicker");
     }
 }
