@@ -22,7 +22,6 @@ jobs:
     strategy:
       matrix:
         api-level: [24, 29, 31]
-        target: [google_apis]
         
     steps:
       - name: checkout
@@ -34,11 +33,8 @@ jobs:
       - name: run uitests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          java-version: '11'
           api-level: 29
-          target: ${{ matrix.target }}
-          disable-animations: true
-          script: ./gradlew connectedCheck
+          script: ./gradlew createDebugAndroidTestCoverageReport
         
   build:
     name: Generate APK
